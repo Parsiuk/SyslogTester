@@ -43,7 +43,17 @@ namespace SyslogTester
         private void updateDestination()
         {
             var syslogServer = textBoxHostname.Text;
-            var syslogPort = int.Parse(textBoxPort.Text);
+            var syslogPort = 514;
+
+            try
+            {
+                syslogPort = int.Parse(textBoxPort.Text);
+            } catch (Exception ex)
+            {
+                labelStatusBar.Text = "Error when parsing port";
+                textBoxPort.Text = "514";
+                syslogPort = 514;
+            }
 
             var config = new NLog.Config.LoggingConfiguration();
             var logServerTarget = new NLog.Targets.Syslog.SyslogTarget();
@@ -58,6 +68,7 @@ namespace SyslogTester
 
             NLog.LogManager.Configuration = config;
 
+            labelStatusBar.Text = "Destination updated";
         }
 
         private void textBoxHostname_TextChanged(object sender, EventArgs e)
@@ -89,6 +100,7 @@ namespace SyslogTester
         {
             var logger = NLog.LogManager.GetCurrentClassLogger();
             logger.Info(textBoxMessage.ToString);
+            labelStatusBar.Text = "Message sent";
         }
 
 

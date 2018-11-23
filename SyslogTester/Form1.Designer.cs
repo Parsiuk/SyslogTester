@@ -36,6 +36,7 @@
             this.textBoxHostname = new System.Windows.Forms.TextBox();
             this.textBoxPort = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.labelStatusBar = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -105,11 +106,21 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // labelStatusBar
+            // 
+            this.labelStatusBar.AutoSize = true;
+            this.labelStatusBar.Location = new System.Drawing.Point(12, 73);
+            this.labelStatusBar.Name = "labelStatusBar";
+            this.labelStatusBar.Size = new System.Drawing.Size(37, 13);
+            this.labelStatusBar.TabIndex = 7;
+            this.labelStatusBar.Text = "Status";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(496, 89);
+            this.ClientSize = new System.Drawing.Size(496, 109);
+            this.Controls.Add(this.labelStatusBar);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBoxPort);
             this.Controls.Add(this.textBoxHostname);
@@ -118,8 +129,8 @@
             this.Controls.Add(this.textBoxMessage);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(512, 128);
-            this.MinimumSize = new System.Drawing.Size(512, 128);
+            this.MaximumSize = new System.Drawing.Size(512, 148);
+            this.MinimumSize = new System.Drawing.Size(512, 148);
             this.Name = "Form1";
             this.Text = "Syslog Tester v0.1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -137,6 +148,7 @@
         private System.Windows.Forms.TextBox textBoxHostname;
         private System.Windows.Forms.TextBox textBoxPort;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label labelStatusBar;
     }
 }
 
