@@ -20,6 +20,8 @@ namespace SyslogTester
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            comboBox1.SelectedIndex = 0;
+
             var config = new NLog.Config.LoggingConfiguration();
             var logServerTarget = new NLog.Targets.Syslog.SyslogTarget();
             logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local1;
@@ -42,6 +44,7 @@ namespace SyslogTester
 
         private void updateDestination()
         {
+            updateDestination();
             var syslogServer = textBoxHostname.Text;
             var syslogPort = 514;
 
