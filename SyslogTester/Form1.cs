@@ -38,13 +38,11 @@ namespace SyslogTester
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //Update destination clicked
-            updateDestination();
+            
         }
 
         private void updateDestination()
         {
-            updateDestination();
             var syslogServer = textBoxHostname.Text;
             var syslogPort = 514;
 
@@ -60,7 +58,47 @@ namespace SyslogTester
 
             var config = new NLog.Config.LoggingConfiguration();
             var logServerTarget = new NLog.Targets.Syslog.SyslogTarget();
-            logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local1;
+
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0:
+                    logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local0;
+                    break;
+
+                case 1:
+                    logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local1;
+                    break;
+
+                case 2:
+                    logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local2;
+                    break;
+
+                case 3:
+                    logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local3;
+                    break;
+
+                case 4:
+                    logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local4;
+                    break;
+
+                case 5:
+                    logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local5;
+                    break;
+
+                case 6:
+                    logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local6;
+                    break;
+
+                case 7:
+                    logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local7;
+                    break;
+
+                default:
+                    logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local0;
+                    break;
+            }
+
+
             logServerTarget.MessageCreation.Rfc = NLog.Targets.Syslog.Settings.RfcNumber.Rfc5424;
             logServerTarget.MessageCreation.Rfc5424.AppName = "SyslogTester";
             logServerTarget.MessageCreation.Rfc5424.Hostname = "${machinename}";
@@ -70,18 +108,16 @@ namespace SyslogTester
             config.AddRule(LogLevel.Info, LogLevel.Fatal, logServerTarget);
 
             NLog.LogManager.Configuration = config;
-
-            labelStatusBar.Text = "Destination updated";
         }
 
         private void textBoxHostname_TextChanged(object sender, EventArgs e)
         {
-            //updateDestination();
+
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
-            //updateDestination();
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -101,6 +137,8 @@ namespace SyslogTester
 
         private void button1_Click(object sender, EventArgs e)
         {
+            updateDestination();
+
             var logger = NLog.LogManager.GetCurrentClassLogger();
             logger.Info(textBoxMessage.ToString);
             labelStatusBar.Text = "Message sent";
