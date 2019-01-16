@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,15 +24,17 @@ namespace SyslogTester
             var config = new NLog.Config.LoggingConfiguration();
             var logServerTarget = new NLog.Targets.Syslog.SyslogTarget();
             logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local1;
-            logServerTarget.MessageCreation.Rfc = NLog.Targets.Syslog.Settings.RfcNumber.Rfc5424;
-            logServerTarget.MessageCreation.Rfc5424.AppName = "SyslogTester";
-            logServerTarget.MessageCreation.Rfc5424.Hostname = "${machinename}";
-            logServerTarget.MessageSend.Udp.Server = "127.0.0.1";
-            logServerTarget.MessageSend.Udp.Port = 514;
+            //logServerTarget.MessageCreation.Rfc = NLog.Targets.Syslog.Settings.RfcNumber.Rfc5424;
+            //logServerTarget.MessageCreation.Rfc5424.AppName = "SyslogTester";
+            //logServerTarget.MessageCreation.Rfc5424.Hostname = "${machinename}";
+            logServerTarget.MessageSend.Tcp.Server = "127.0.0.1";
+            logServerTarget.MessageSend.Tcp.Port = 514;
+            logServerTarget.MessageSend.Protocol = NLog.Targets.Syslog.Settings.ProtocolType.Tcp;
             logServerTarget.Name = "*";
             config.AddRule(LogLevel.Info, LogLevel.Fatal, logServerTarget);
 
             NLog.LogManager.Configuration = config;
+            LogManager.ThrowExceptions = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -58,11 +61,9 @@ namespace SyslogTester
             var config = new NLog.Config.LoggingConfiguration();
             var logServerTarget = new NLog.Targets.Syslog.SyslogTarget();
             logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local1;
-            logServerTarget.MessageCreation.Rfc = NLog.Targets.Syslog.Settings.RfcNumber.Rfc5424;
-            logServerTarget.MessageCreation.Rfc5424.AppName = "SyslogTester";
-            logServerTarget.MessageCreation.Rfc5424.Hostname = "${machinename}";
-            logServerTarget.MessageSend.Udp.Server = syslogServer;
-            logServerTarget.MessageSend.Udp.Port = syslogPort;
+            logServerTarget.MessageSend.Tcp.Server = syslogServer;
+            logServerTarget.MessageSend.Tcp.Port = syslogPort;
+            logServerTarget.MessageSend.Protocol = NLog.Targets.Syslog.Settings.ProtocolType.Tcp;
             logServerTarget.Name = "*";
             config.AddRule(LogLevel.Info, LogLevel.Fatal, logServerTarget);
 
@@ -101,6 +102,7 @@ namespace SyslogTester
             var logger = NLog.LogManager.GetCurrentClassLogger();
             logger.Info(textBoxMessage.ToString);
             labelStatusBar.Text = "Message sent";
+            Thread.Sleep(5000);
         }
 
 
