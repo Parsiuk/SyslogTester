@@ -34,7 +34,7 @@ namespace SyslogTester
             config.AddRule(LogLevel.Info, LogLevel.Fatal, logServerTarget);
 
             NLog.LogManager.Configuration = config;
-            LogManager.ThrowExceptions = true;
+            NLog.LogManager.ThrowExceptions = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -68,6 +68,7 @@ namespace SyslogTester
             config.AddRule(LogLevel.Info, LogLevel.Fatal, logServerTarget);
 
             NLog.LogManager.Configuration = config;
+            NLog.LogManager.ThrowExceptions = true;
 
             labelStatusBar.Text = "Destination updated";
         }
