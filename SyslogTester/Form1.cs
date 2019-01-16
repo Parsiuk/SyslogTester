@@ -23,7 +23,7 @@ namespace SyslogTester
         {
             var config = new NLog.Config.LoggingConfiguration();
             var logServerTarget = new NLog.Targets.Syslog.SyslogTarget();
-            logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local1;
+            logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local7;
             //logServerTarget.MessageCreation.Rfc = NLog.Targets.Syslog.Settings.RfcNumber.Rfc5424;
             //logServerTarget.MessageCreation.Rfc5424.AppName = "SyslogTester";
             //logServerTarget.MessageCreation.Rfc5424.Hostname = "${machinename}";
@@ -61,7 +61,7 @@ namespace SyslogTester
 
             var config = new NLog.Config.LoggingConfiguration();
             var logServerTarget = new NLog.Targets.Syslog.SyslogTarget();
-            logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local1;
+            logServerTarget.MessageCreation.Facility = NLog.Targets.Syslog.Settings.Facility.Local7;
             logServerTarget.MessageSend.Tcp.Server = syslogServer;
             logServerTarget.MessageSend.Tcp.Port = syslogPort;
             logServerTarget.MessageSend.Protocol = NLog.Targets.Syslog.Settings.ProtocolType.Tcp;
