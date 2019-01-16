@@ -31,7 +31,7 @@ namespace SyslogTester
             logServerTarget.MessageSend.Tcp.Port = 514;
             logServerTarget.MessageSend.Protocol = NLog.Targets.Syslog.Settings.ProtocolType.Tcp;
             logServerTarget.MessageSend.Tcp.Tls.Enabled = true;
-            logServerTarget.Name = "*";
+            logServerTarget.Name = "syslog";
             config.AddRule(LogLevel.Info, LogLevel.Fatal, logServerTarget);
 
             NLog.LogManager.Configuration = config;
@@ -66,7 +66,7 @@ namespace SyslogTester
             logServerTarget.MessageSend.Tcp.Port = syslogPort;
             logServerTarget.MessageSend.Protocol = NLog.Targets.Syslog.Settings.ProtocolType.Tcp;
             logServerTarget.MessageSend.Tcp.Tls.Enabled = true;
-            logServerTarget.Name = "*";
+            logServerTarget.Name = "syslog";
             config.AddRule(LogLevel.Info, LogLevel.Fatal, logServerTarget);
 
             NLog.LogManager.Configuration = config;
